@@ -30,6 +30,11 @@ const userSchema = new mongoose.Schema(
       required: [true, "User Password is required"],
       minLength: 6,
     },
+    confirmPassword: {
+      type: String,
+      required: [true, "User Password is required"],
+      minLength: 6,
+    },
   },
   { timestamps: true }
 );
