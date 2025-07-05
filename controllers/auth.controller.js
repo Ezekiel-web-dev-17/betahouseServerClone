@@ -34,7 +34,7 @@ export const signUp = async (req, res, next) => {
       { session }
     );
 
-    const token = await jwt.sign({ userId: user[0].id }, JWT_SECRET, {
+    const token = jwt.sign({ userId: user[0].id }, JWT_SECRET, {
       expiresIn: JWT_EXPIRES_IN,
     });
 
