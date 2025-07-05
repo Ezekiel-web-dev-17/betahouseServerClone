@@ -9,13 +9,7 @@ export const signUp = async (req, res, next) => {
 
   session.startTransaction();
   try {
-    const { firstname, lastname, email, password, confirmPassword } = req.body;
-
-    if (password !== confirmPassword || !confirmPassword) {
-      const err = new Error("Password is NOT confirmed.");
-      err.statusCode = 409;
-      throw err;
-    }
+    const { firstname, lastname, email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
 
