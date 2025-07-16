@@ -2,7 +2,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import authRoute from "./routes/auth.routes.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
-import { PORT } from "./config/env.js";
+import { PORT, STRIPE_SECRET_KEY } from "./config/env.js";
 import { connectDb } from "./database/mongodb.js";
 import authorize from "./middlewares/auth.middleware.js";
 import cors from "cors";
