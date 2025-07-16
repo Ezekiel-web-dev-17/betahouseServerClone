@@ -6,6 +6,7 @@ import { PORT } from "./config/env.js";
 import { connectDb } from "./database/mongodb.js";
 import authorize from "./middlewares/auth.middleware.js";
 import cors from "cors";
+import router from "./routes/checkout.routes.js";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(cookieParser());
 
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/checkout", router);
 app.use(authorize);
 app.use(errorMiddleware);
 
