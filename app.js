@@ -13,7 +13,14 @@ app.use(express.static("public"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+// ✅ CORS CONFIGURATION
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://betahouse3.vercel.app"],
+    credentials: true,
+  })
+);
+
 app.use(cookieParser());
 
 app.use("/api/v1/auth", authRoute);
