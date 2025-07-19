@@ -2,17 +2,18 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import authRoute from "./routes/auth.routes.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
-import { PORT, STRIPE_SECRET_KEY } from "./config/env.js";
+import { PORT } from "./config/env.js";
 import { connectDb } from "./database/mongodb.js";
 import authorize from "./middlewares/auth.middleware.js";
 import cors from "cors";
 import router from "./routes/checkout.routes.js";
-
+import morgan from "morgan";
 const app = express();
 app.use(express.static("public"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan("dev"));
 // ✅ CORS CONFIGURATION
 app.use(
   cors({
