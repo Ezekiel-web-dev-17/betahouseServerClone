@@ -7,14 +7,16 @@ const authorize = async (req, res, next) => {
     let token;
 
     if (
-      req.header.authorization &&
-      req.header.authorization.startsWith("Bearer ")
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer ")
     ) {
-      token = req.header.authorization.split(" ")[1];
+      token = req.headers.authorization.split(" ")[1];
     }
 
     if (!token) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
     }
 
     const decode = jwt.verify(token, JWT_SECRET);

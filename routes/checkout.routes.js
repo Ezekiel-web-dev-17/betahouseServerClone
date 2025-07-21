@@ -1,10 +1,9 @@
 import express from "express";
 import Stripe from "stripe";
-import dotenv from "dotenv";
 import { STRIPE_SECRET_KEY } from "../config/env.js";
-dotenv.config();
+import authorize from "../middlewares/auth.middleware.js";
 
-const router = express.Router();
+const checkOutRoute = express.Router();
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
 const calculateOrderAmount = (items) => {
@@ -17,7 +16,7 @@ const calculateOrderAmount = (items) => {
   return total * 100;
 };
 
-router.post("/create-payment-intent", async (req, res) => {
+checkOutRoute.post("/create-payment-intent", authorize, async (req, res) => {
   try {
     const { items } = req.body;
 
@@ -31,7 +30,6 @@ router.post("/create-payment-intent", async (req, res) => {
       },
     });
 
-    console.log("Created PaymentIntent:", paymentIntent.id);
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
@@ -41,4 +39,4 @@ router.post("/create-payment-intent", async (req, res) => {
   }
 });
 
-export default router;
+export default checkOutRoute;
