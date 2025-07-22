@@ -13,7 +13,7 @@ const calculateOrderAmount = (items) => {
   items.forEach((item) => {
     total += item.amount;
   });
-  return total * 100;
+  return total;
 };
 
 checkOutRoute.post("/create-payment-intent", authorize, async (req, res) => {
